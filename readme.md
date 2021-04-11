@@ -1,3 +1,3 @@
-# React - Redux with Material-UI
+# SimFinance
 * Download and install the dependenices by running `npm install`
 * Run the dev-server by running the command `npm run dev-server`
