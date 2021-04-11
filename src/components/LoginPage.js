@@ -15,7 +15,6 @@ import Button from '@material-ui/core/Button'
 
 export class LoginPage extends React.Component {
     constructor(props) {
-        super(props)
         this.state = {
             userName: props.userName || '',
             hasError: false,

@@ -20,7 +20,6 @@ import { CurrencyFormatInput, formatCurrency } from '../utils';
 
 export class WalletForm extends React.Component {
     constructor(props) {
-        super(props);
         this.state = {
             walletTempValues: props.wallet,
             messageopen: false,
