@@ -1,4 +1,4 @@
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     auth: {
         userName: '',
     },
@@ -34,7 +34,7 @@ const INITIAL_STATE = {
     showGettingStarted: true,
     showEndSimulationSummary: false,
     isSimulationCompleted: false,
-    appVersion: 1.0,
+    appVersion: 1.1,
 };
 
 export default (state = INITIAL_STATE, action) => {

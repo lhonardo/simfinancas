@@ -341,6 +341,7 @@ class World extends React.Component {
                     >
                         Avançar Mês <SkipNextIcon />
                     </Button>
+                    <br/>
                     {
                         this.props.isSimulationCompleted &&
                         <Button

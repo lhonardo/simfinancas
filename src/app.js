@@ -8,6 +8,33 @@ import './styles/styles.css';
 import { theme } from './theme/theme';
 import configureStore from './store/configureStore';
 
+class ErrorBoundary extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { hasError: false };
+    }
+
+    static getDerivedStateFromError(error) {
+      // Update state so the next render will show the fallback UI.
+      return { hasError: true };
+    }
+
+    componentDidCatch(error, errorInfo) {
+      // You can also log the error to an error reporting service
+      console.log(error, errorInfo);
+      localStorage.clear();
+    }
+
+    render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return <h1>Ops, algo errado aconteceu, a simulação irá ser resetada. Por favor recarregue a página!</h1>;
+      }
+
+      return this.props.children;
+    }
+}
+
 const saveState = (state) => {
     try {
         const serializedState = JSON.stringify(state);
@@ -33,4 +60,4 @@ const App = () => (
     </Provider>
 );
 
-render(<App />, document.getElementById('app'));
+render(<ErrorBoundary><App /></ErrorBoundary>, document.getElementById('app'));
