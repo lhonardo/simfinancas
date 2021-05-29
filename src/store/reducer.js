@@ -34,6 +34,7 @@ const INITIAL_STATE = {
     showGettingStarted: true,
     showEndSimulationSummary: false,
     isSimulationCompleted: false,
+    appVersion: 1.0,
 };
 
 export default (state = INITIAL_STATE, action) => {
