@@ -10,18 +10,14 @@ const Info = (props) => (
         container
         justify="center"
         alignContent="center"
-        style={{ height: '100%', padding: '5%' }}
+        style={{ height: '100%', padding: '1%'}}
     >
-        <Paper style={{ padding: 20, height: '80%' }} className="grid-aligned">
-            <Typography variant="display2" gutterBottom style={{ padding: 15 }}>
-                Informação:
-            </Typography>
-
+        <Paper style={{ padding: 15 }} className="grid-aligned">
             <img alt={props.content.title} src={props.content.icon} />
 
-            <Typography variant="title">{props.content.name}</Typography>
+            <Typography variant="title" paragraph>{props.content.name}</Typography>
 
-            <Typography variant="subheading">
+            <Typography variant="subheading" paragraph style={{whiteSpace: 'pre-wrap'}}>
                 {props.content.description}
             </Typography>
 

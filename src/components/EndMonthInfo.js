@@ -17,76 +17,76 @@ const EndMonthInfo = (props) => (
         className='grid-aligned' 
         style={{ height: '100%' }}
     >
-        <Grid container>
-            <Paper style={{ padding: 20 }} className="grid-aligned">
-                <Typography variant="headline" gutterBottom style={{ padding: 15 }}>
-                    Resumo do mês
-                </Typography>
+        <Paper className="grid-aligned" style={{ padding: 20 }}>
+            <Typography variant="headline" gutterBottom style={{ padding: 15 }}>
+                Resumo do mês
+            </Typography>
 
-                <img alt={props.content.title} src={props.content.icon} />
+            <img alt={props.content.title} src={props.content.icon} />
 
-                <Typography variant="title">{props.content.title}</Typography>
+            <Typography variant="title">{props.content.title}</Typography>
 
-                <Typography variant="subheading">
-                    {props.content.description}
-                </Typography>
+            <br />
 
-                <br />
+            <Typography variant="subheading">
+                {props.content.description}
+            </Typography>
 
-                <Typography variant="title">Variações:</Typography>
+            <br />
 
-                <br />
+            <Typography variant="title">Variações:</Typography>
 
-                <Table aria-label="spanning table">
-                    <TableBody>
-                        {[
-                            'inflation',
-                            'interestRate',
-                            'rareMaterial',
-                            'stockMarketPoints',
-                        ].map((key) => {
-                            const value = props.content[key];
-                            return (
-                                <TableRow key={key}>
-                                    <TableCell style={{ padding: 1 }}>
-                                        <img
-                                            width="30"
-                                            style={{ marginRight: 10 }}
-                                            alt={DEFINITIONS.world[key].name}
-                                            src={DEFINITIONS.world[key].icon}
-                                        />
-                                    </TableCell>
-                                    <TableCell>{DEFINITIONS.world[key].name}:</TableCell>
-                                    <TableCell
-                                        numeric
-                                        style={
-                                            value != 0
-                                                ? { color: value > 0 ? 'green' : 'red' }
-                                                : {}
-                                        }
-                                    >
-                                        {value > 0 && '+'}
-                                        {formatPercentage(value)}
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-                
+            <br />
 
-                <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>
-                    <Button
-                        type="button"
-                        color="primary"
-                        variant="raised"
-                        onClick={props.close}
-                    >
-                        Fechar
-                    </Button>
-                </Grid>
-            </Paper>
-        </Grid>
+            <Table aria-label="spanning table">
+                <TableBody>
+                    {[
+                        'inflation',
+                        'interestRate',
+                        'rareMaterial',
+                        'stockMarketPoints',
+                    ].map((key) => {
+                        const value = props.content[key];
+                        return (
+                            <TableRow key={key}>
+                                <TableCell style={{ padding: 1 }}>
+                                    <img
+                                        width="30"
+                                        style={{ marginRight: 10 }}
+                                        alt={DEFINITIONS.world[key].name}
+                                        src={DEFINITIONS.world[key].icon}
+                                    />
+                                </TableCell>
+                                <TableCell>{DEFINITIONS.world[key].name}:</TableCell>
+                                <TableCell
+                                    numeric
+                                    style={
+                                        value != 0
+                                            ? { color: value > 0 ? 'green' : 'red' }
+                                            : {}
+                                    }
+                                >
+                                    {value > 0 && '+'}
+                                    {formatPercentage(value)}
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
+            
+
+            <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>
+                <Button
+                    type="button"
+                    color="primary"
+                    variant="raised"
+                    onClick={props.close}
+                >
+                    Fechar
+                </Button>
+            </Grid>
+        </Paper>
     </div>
 );
 

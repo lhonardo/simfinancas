@@ -22,6 +22,19 @@
     position: relative;
 }*/
 
+html {
+    background-color: whitesmoke;
+}
+
+body {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+div {
+    touch-action: manipulation;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -74,16 +87,16 @@ a {
 }
 
 .footer-container-box {
-    background-color: #f1f3f4;
+    background-color:#1565c0;
     height: 12vh;
     text-align: center;
     padding-top: 10px;
-    color: black;
+    color: white;
     margin-top: 14px;
 }
 
 .footer-container-box h1 {
-    color: rgba(0, 0, 0, 0.4);
+    color: white;
 }
 
 .bodyComponent {
@@ -160,11 +173,6 @@ a {
 }
 .loginformgroup svg {
     color: black;
-}
-
-form {
-    padding: 30px;
-    padding-top: 60px;
 }
 
 .loginbutton {
@@ -253,6 +261,10 @@ form {
     display: grid;
     justify-items: center;
     align-items: center;
+}
+
+div:focus {
+    outline: none !important;
 }
 
 .raphael-group-53-labels text {

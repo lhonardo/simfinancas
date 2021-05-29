@@ -35,7 +35,7 @@ const HomePage = (props) => (
             </Grid>
         </Grid>
         <Modal open={props.showEndMonthInfo}>
-            <DialogContent>
+            <DialogContent style={{height: '100%'}}>
                 {props.showEventSummary ? (
                     <EndEventSummary
                         close={() => props.closeModal(false)}
@@ -52,7 +52,7 @@ const HomePage = (props) => (
             </DialogContent>
         </Modal>
         <Modal open={props.showInfoModal}>
-            <DialogContent>
+            <DialogContent style={{height: '100%'}}>
                 {props.showInfoModal ? (
                     <Info
                         close={props.closeInfoModal}

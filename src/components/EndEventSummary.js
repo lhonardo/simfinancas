@@ -10,14 +10,11 @@ const EndEventSummary = (props) => (
         container
         justify="center"
         alignContent="center"
-        style={{ height: '100%', padding: '5%' }}
+        style={{ height: '100%' }}
     >
-        <Paper style={{ padding: 20, height: '80%' }} className="grid-aligned">
-            <Typography variant="display2" gutterBottom style={{ padding: 15 }}>
-                Final do evento
-            </Typography>
-            <Typography variant="title" gutterBottom style={{ padding: 15 }}>
-                Você acabou de passar por uma simulação de um evento histórico:
+        <Paper style={{ padding: 20 }} className="grid-aligned">
+            <Typography variant="title" gutterBottom style={{ padding: 5 }}>
+                Fim! Você acabou de passar pela simulação de um evento histórico:
             </Typography>
 
             <Typography variant="title">

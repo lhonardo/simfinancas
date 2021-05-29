@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     },
     world: {
         year: 1,
-        month: 0,
+        month: 1,
         name: '',
         inflation: 0.0056,
         interestRate: 0.0056,
@@ -22,17 +22,18 @@ const INITIAL_STATE = {
         }
     },
     wallet: {
-        account: 0,
-        stockMarket: 4000,
-        publicTreasure: 3000,
-        rareMaterial: 3000,
+        account: 10000,
+        stockMarket: 0,
+        fixedIncome: 0,
+        rareMaterial: 0,
     },
     showEndMonthInfo: false,
     endMonthInfoContent: {},
     showInfoModal: false,
     infoModalContent: {},
     showGettingStarted: true,
-    showEndSimulationSummary: false
+    showEndSimulationSummary: false,
+    isSimulationCompleted: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -102,7 +103,8 @@ export default (state = INITIAL_STATE, action) => {
         case 'OPEN_END_SIMULATION_SUMMARY':
             return {
                 ...state,
-                showEndSimulationSummary: true
+                showEndSimulationSummary: true,
+                isSimulationCompleted: true
             }
         
         case 'CLOSE_END_SIMULATION_SUMMARY':

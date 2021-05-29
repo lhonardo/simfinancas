@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import Tooltip from '@material-ui/core/Tooltip';
 import Image from 'material-ui-image';
 
 import Table from '@material-ui/core/Table';
@@ -19,14 +20,12 @@ import { DEFINITIONS, infoIcon } from '../constants';
 import { CurrencyFormatInput, formatCurrency } from '../utils';
 
 export class WalletForm extends React.Component {
-    constructor(props) {
-        this.state = {
-            walletTempValues: props.wallet,
-            messageopen: false,
-            messageInfo: {},
-            gender: 'male',
-        };
-    }
+    state = {
+        walletTempValues: this.props.wallet,
+        messageopen: false,
+        messageInfo: {},
+        gender: 'male',
+    };
 
     getAvailableValue = () => {
         const { getSumWallet } = this.props;
@@ -62,12 +61,12 @@ export class WalletForm extends React.Component {
         this.setState({ messageopen: false });
     };
 
-    handleInputChange = (event, field) => {
+    handleInputChange = (value, field) => {
         this.setState({
             walletTempValues: {
                 ...this.state.walletTempValues,
-                [field]: String(event.target.value).length
-                    ? parseFloat(event.target.value)
+                [field]: String(value).length
+                    ? parseFloat(value)
                     : 0,
             },
         });
@@ -111,7 +110,7 @@ export class WalletForm extends React.Component {
                 >
                     <Paper
                         className="contact-page-paper"
-                        style={{ width: '100%', padding: 20 }}
+                        style={{ width: '100%', padding: 5 }}
                     >
                         <IconButton
                             key="close"
@@ -129,24 +128,28 @@ export class WalletForm extends React.Component {
                         >
                             Carteira
                         </Typography>
-                        <Typography variant="title" gutterBottom align="center">
+                        <Typography 
+                            variant="title" 
+                            gutterBottom 
+                            align="center" 
+                            color={availableValue ? 'error' : 'textPrimary'}
+                            style={{minHeight: 80}}
+                        >
                             Disponível para ser aplicado:{' '}
                             {formatCurrency(availableValue)}
                         </Typography>
                         <Grid container>
-                            <Table aria-label="spanning table">
-                                <TableBody>
                                     {Object.keys(DEFINITIONS.wallet).map((key) => {
                                         return (
-                                            <TableRow key={key}>
-                                                <TableCell style={{ padding: 1 }}>
+                                            <Grid container xs={12} key={key} style={{marginBottom: 10}}>
+                                                <Grid xs={2}>
                                                     <img
                                                         src={DEFINITIONS.wallet[key].icon}
                                                         width='40'
                                                     />
 
-                                                </TableCell>
-                                                <TableCell>
+                                                </Grid>
+                                                <Grid xs={4}>
                                                     <TextField
                                                         id={key}
                                                         label={DEFINITIONS.wallet[key].name}
@@ -154,34 +157,50 @@ export class WalletForm extends React.Component {
                                                             this.state.walletTempValues[key]
                                                         }
                                                         onChange={(e) =>
-                                                            this.handleInputChange(e, key)
+                                                            this.handleInputChange(e.target.value, key)
                                                         }
                                                         required
                                                         InputProps={{
                                                             inputComponent: CurrencyFormatInput,
                                                         }}
                                                     />
-                                                </TableCell>
-                                            </TableRow>
+                                                </Grid>
+                                                <Grid xs={6}>
+                                                    <Button
+                                                        type="button"
+                                                        color="primary"
+                                                        variant="fab"
+                                                        disabled={this.state.walletTempValues[key] <= 0}
+                                                        style={{marginRight: 10}}
+                                                        onClick={() =>
+                                                            this.handleInputChange(
+                                                                this.state.walletTempValues[key] < 100 
+                                                                    ? 0 
+                                                                    : this.state.walletTempValues[key] - 100, 
+                                                            key)
+                                                        }
+                                                    >
+                                                        - $100
+                                                    </Button>
+                                                    <Button
+                                                        type="button"
+                                                        color="primary"
+                                                        variant="fab"
+                                                        disabled={availableValue <= 0}
+                                                        onClick={(e) => 
+                                                            this.handleInputChange(
+                                                                availableValue < 100
+                                                                ? this.state.walletTempValues[key] + availableValue
+                                                                : this.state.walletTempValues[key] + 100, 
+                                                            key)
+                                                        }
+                                                    >
+                                                        + $100
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
                                         )
                                     })}
-                                </TableBody>
-                            </Table>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {availableValue != 0 && (
-                                <div>
-                                    <Typography
-                                        variant="title"
-                                        gutterBottom
-                                        align="center"
-                                        color="error"
-                                    >
-                                        Para salvar, valor disponível para
-                                        ser aplicado deve ser 0
-                                    </Typography>
-                                </div>
-                            )}
                         </Grid>
                         <Grid
                             item
@@ -190,15 +209,23 @@ export class WalletForm extends React.Component {
                             md={12}
                             style={{ marginTop: 10 }}
                         >
-                            <Button
-                                type="button"
-                                color="primary"
-                                variant="raised"
-                                onClick={this.onSubmit}
-                                disabled={availableValue != 0}
+                            <Tooltip 
+                                title={<h2>
+                                    Para salvar, valor disponível para ser aplicado deve ser 0
+                                </h2>}
+                                open={availableValue != 0}
                             >
-                                Salvar carteira
-                            </Button>
+                                <Button
+                                    type="button"
+                                    color="primary"
+                                    variant="raised"
+                                    onClick={this.onSubmit}
+                                    disabled={availableValue != 0}
+                                    label="Para salvar, valor disponível para ser aplicado deve ser 0"
+                                >
+                                    Salvar carteira
+                                </Button>
+                            </Tooltip>
                         </Grid>
                     </Paper>
                 </Grid>

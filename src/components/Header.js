@@ -9,12 +9,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import ExtensionIcon from '@material-ui/icons/Extension';
-import PhoneIcon from '@material-ui/icons/Phone';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -25,10 +21,7 @@ import { logout, openGettingStarted } from '../store/actions';
 import { NavLink } from 'react-router-dom';
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: 1, open: false, componentsmenuopen: false };
-    }
+    state = { value: 1, open: false, componentsmenuopen: false };
 
     handleChange = (event, index, value) => this.setState({ value });
     onLeftIconButtonClick = (event, index, value) => {

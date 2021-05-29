@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 import { DEFINITIONS, infoIcon } from '../constants';
 import {
@@ -22,6 +23,7 @@ import {
     changeWallet,
     openInfoModal,
     openEndSimulationSummary,
+    logout,
 } from '../store/actions';
 
 import FusionCharts from 'fusioncharts';
@@ -39,7 +41,6 @@ import globe from '../assets/img/globe.gif';
 import monthIcon from '../assets/img/month.png';
 
 import { ALL_EVENTS } from '../data/events';
-import { Tab } from '@material-ui/core';
 
 // Pass fusioncharts as a dependency of charts
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
@@ -78,7 +79,7 @@ class World extends React.Component {
             wallet,
         } = this.props;
 
-        if (world.year <= 2 && world.month < 12) {
+        if (world.year <= 2) {
             this.setState({ showLoading: true });
             const newWorld = { ...world };
             const newWallet = { ...wallet };
@@ -117,6 +118,7 @@ class World extends React.Component {
                 // New event month
                 if (
                     availableEvents.length &&
+                    !(world.year === 2 && world.month >= 10) &&
                     eventWillHappenWithProbability()
                 ) {
                     const event =
@@ -167,7 +169,7 @@ class World extends React.Component {
             });
 
             // Adjust wallet values
-            ['publicTreasure', 'stockMarket', 'rareMaterial'].forEach((key) => {
+            ['fixedIncome', 'stockMarket', 'rareMaterial'].forEach((key) => {
                 const affectedBy = DEFINITIONS.wallet[key].affectedBy;
 
                 if (wallet[key] > 0) {
@@ -184,7 +186,7 @@ class World extends React.Component {
                 this.setState({ showLoading: false });
                 changeWallet(newWallet);
                 changeWorld(newWorld);
-                if (newWorld.year == 2 && newWorld.month == 12) {
+                if (newWorld.year > 2 && newWorld.month == 12) {
                     openEndSimulationSummary();
                 }
                 openEndMonthInfo(simulatedValues);
@@ -225,39 +227,58 @@ class World extends React.Component {
                             'Jan 01|Fev 01|Mar 01|Abr 01|Mai 01|Jun 01|Jul 01|Ago 01|Set 01|Out 01|Nov 01|Dec 01|Jan 02|Fev 02|Mar 02|Abr 02|Mai 02|Jun 02|Jul 02|Ago 02|Set 02|Out 02|Nov 02|Dec 02|',
                     },
                 ],
-                dataset: {
-                    seriesname: '',
-                    data: '',
-                },
+                dataset: Object.keys(world.simulationResults).map((key) => {
+                    return {
+                        seriesname: DEFINITIONS.world[key].name,
+                        data: world.simulationResults[key].join('|'),
+                    };
+                }),
             },
         };
 
         return (
             <Grid container>
-                <Grid item xs={8}>
+                <Grid container alignItems="baseline" justify="center" xs={8}>
                     <Typography variant="title" gutterBottom align="center">
                         Seu Mundo
                     </Typography>
-                    <img
-                        width="40"
-                        style={{ marginRight: 10, float: 'left' }}
-                        alt="Mês"
-                        src={monthIcon}
-                    />
-                    <Typography
-                        variant="title"
-                        align="center"
-                        style={{ float: 'left', lineHeight: '45px' }}
-                    >
-                        Mês: {world.month} Ano: {world.year}
-                    </Typography>
+                    <Grid justify="space-evenly" container>
+                        <img
+                            width="40"
+                            height="40"
+                            style={{ marginRight: 5, float: 'left' }}
+                            alt="Mês"
+                            src={monthIcon}
+                        />
+                        { this.props.isSimulationCompleted 
+                            ? <p>
+                                Simulação concluída!
+                            </p>
+                            : <div>
+                                <Typography
+                                    variant="headline"
+                                    align="center"
+                                    style={{ lineHeight: '45px' }}
+                                >
+                                    Mês: {world.month} / 12
+                                </Typography>
+                                <Typography
+                                    variant="headline"
+                                    align="center"
+                                    style={{ lineHeight: '45px' }}
+                                >
+                                    Ano: {world.year} / 2
+                                </Typography>
+                            </div>
+                        }
+                    </Grid>
                 </Grid>
                 <Grid item xs={4}>
                     <img src={globe} alt="globe" width="100%" height="auto" />
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <ReactFC {...zoomLineConfig} />
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
                     <Table aria-label="spanning table">
                         <TableBody>
@@ -320,6 +341,19 @@ class World extends React.Component {
                     >
                         Avançar Mês <SkipNextIcon />
                     </Button>
+                    {
+                        this.props.isSimulationCompleted &&
+                        <Button
+                            type="button"
+                            color="primary"
+                            variant="extendedFab"
+                            size="large"
+                            onClick={this.props.startLogout}
+                            style={{ marginTop: 20 }}
+                        >
+                            Começar de novo! <AutorenewIcon />
+                        </Button>
+                    }
                 </Grid>
                 <Modal open={this.state.showLoading}>
                     <div className="grid-aligned" style={{ height: '100%' }}>
@@ -340,6 +374,7 @@ class World extends React.Component {
 const mapStateToProps = (state) => ({
     world: state.world,
     wallet: state.wallet,
+    isSimulationCompleted: state.isSimulationCompleted,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -348,6 +383,7 @@ const mapDispatchToProps = (dispatch) => ({
     openEndMonthInfo: (content) => dispatch(openEndMonthInfo(content)),
     openInfoModal: (key, name) => dispatch(openInfoModal(key, name)),
     openEndSimulationSummary: () => dispatch(openEndSimulationSummary()),
+    startLogout: () => dispatch(logout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(World);

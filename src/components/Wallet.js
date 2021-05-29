@@ -117,6 +117,7 @@ class Wallet extends React.Component {
                         variant="raised"
                         size="large"
                         onClick={() => this.setState({editing: true})}
+                        disabled={this.props.isSimulationCompleted}
                     >
                         Ajustar minha carteira
                     </Button>
@@ -125,6 +126,8 @@ class Wallet extends React.Component {
                     open={this.state.editing} 
                     onClose={() => {this.setState({editing: false})}}
                     onEscapeKeyDown={this.closeModal}
+                    style={{maxWidth: 600, margin: '0 auto'}}
+                    disableBackdropClick
                 >
                     <WalletForm
                         wallet={this.props.wallet}
@@ -142,6 +145,7 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
     wallet: state.wallet,
+    isSimulationCompleted: state.isSimulationCompleted,
 });
 
 const mapDispatchToProps = (dispatch) => ({

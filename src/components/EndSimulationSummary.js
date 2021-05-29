@@ -12,7 +12,6 @@ import TableRow from '@material-ui/core/TableRow';
 import _ from 'lodash';
 
 import { DEFINITIONS } from '../constants';
-import { ALL_EVENTS } from '../data/events';
 
 import { formatPercentage, formatCurrency } from '../utils';
 
@@ -87,7 +86,7 @@ const EndSimulationSummary = (props) => (
                             <TableCell>Variação</TableCell>
                             <TableCell>
                                 {formatPercentage(
-                                    parseFloat((10000 * _.sum(Object.values(props.wallet)) + 10000).toFixed(2))
+                                    ((100 * _.sum(Object.values(props.wallet)) / 10000) - 100) / 100
                                 )}
                             </TableCell>
                         </TableRow>
