@@ -18,6 +18,7 @@ import {
     closeInfoModal,
     closeGettingStarted,
     closeEndSimulationSummary,
+    submitResultsSuccess,
 } from '../store/actions';
 
 const HomePage = (props) => (
@@ -43,9 +44,10 @@ const HomePage = (props) => (
                     />
                 ) : (
                     <EndMonthInfo
-                        close={() =>
-                            props.closeModal(props.world.activeEventMonth == 99)
-                        }
+                        close={() => {
+                            props.closeModal(props.world.activeEventMonth == 99);
+                            scrollTo({left: 0, top: 0, behavior: 'smooth'});
+                        }}
                         content={props.endMonthInfoContent}
                     />
                 )}
@@ -73,7 +75,10 @@ const HomePage = (props) => (
                 <EndSimulationSummary
                     wallet={props.wallet}
                     world={props.world}
-                    close={props.closeEndSimulationSummary} 
+                    close={props.closeEndSimulationSummary}
+                    resultsSubmitted={props.resultsSubmitted}
+                    submitResultsSuccess={props.submitResultsSuccess}
+                    userName={props.userName}
                 />
             </DialogContent>
         </Modal>
@@ -90,6 +95,8 @@ const mapStateToProps = (state) => ({
     infoModalContent: state.infoModalContent,
     showGettingStarted: state.showGettingStarted,
     showEndSimulationSummary: state.showEndSimulationSummary,
+    resultsSubmitted: state.resultsSubmitted,
+    userName: state.auth.userName,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -98,6 +105,7 @@ const mapDispatchToProps = (dispatch) => ({
     closeInfoModal: () => dispatch(closeInfoModal()),
     closeGettingStarted: () => dispatch(closeGettingStarted()),
     closeEndSimulationSummary: () => dispatch(closeEndSimulationSummary()),
+    submitResultsSuccess: () => dispatch(submitResultsSuccess()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -26,11 +26,11 @@ export const LoginPage = (props) => {
             <Paper className="loginPaper">
                 <div className="loginheaderpart">
                     <Typography
-                        variant="display3"
+                        variant="display1"
                         gutterBottom
                         className="loginpageheader"
                     >
-                        SimFinance
+                        SimFinanceiro
                     </Typography>
                 </div>
                 <div style={{padding: 10}}>

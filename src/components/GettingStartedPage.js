@@ -16,27 +16,27 @@ const GettingStarted = (props) => (
             <Typography variant="display2" gutterBottom style={{ padding: 5 }}>
                 Olá!
             </Typography>
-            <Typography variant="title" gutterBottom style={{ padding: 15 }}>
+            <Typography variant="title" gutterBottom style={{ padding: 10 }}>
                 Antes de começar
             </Typography>
             <Typography variant="subheading" paragraph align="left">
                 Obrigado por usar essa ferramenta, ela foi desenvolvida única e exclusivamente para estudo
-                de alguns conceitos do mercado financeiro, todo e qualquer evento, valor, assim como possíveis ganhos ou perdas,
+                de alguns conceitos do mercado financeiro, todo e qualquer evento, valor, assim como possíveis ganhos ou perdas
                 são ficticios.
             </Typography>
             <Typography variant="subheading" paragraph align="left">
-                Para ter mais informações aperte no ícone
+                <b>Importante:</b> antes de avançar o mês aperte nos ícones
                 <img atl='Info' src={infoIcon} width="20" style={{margin: '0 5px'}}/>
-                próximo ao conceito apresentado para abrir a explicação detalhada. 
+                próximos aos conceitos apresentados para abrir a explicação detalhada e obter mais detalhes de como funcionará a simulação. 
             </Typography>
             <Typography variant="subheading" paragraph align="left">
-                Você pode fechar essa página a qualquer momento e continuar depois, seu progresso ficará armazenado.
+                Você pode fechar esse site a qualquer momento e continuar depois, seu progresso ficará armazenado.
             </Typography>
             <Typography variant="subheading" paragraph align="left">
-                Espero que a experiência seja válida.
+                Espero que a experiência seja válida e educativa.
             </Typography>
             <Typography variant="subheading" paragraph align="left">
-                Bom aprendizado :)
+                Boa simulação :)
             </Typography>
 
             <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>

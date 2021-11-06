@@ -17,26 +17,22 @@ const EndMonthInfo = (props) => (
         className='grid-aligned' 
         style={{ height: '100%' }}
     >
-        <Paper className="grid-aligned" style={{ padding: 20 }}>
-            <Typography variant="headline" gutterBottom style={{ padding: 15 }}>
-                Resumo do mês
+        <Paper className="grid-aligned" style={{ padding: 15 }}>
+            <Typography variant="headline">
+                Resumo do mês:
             </Typography>
 
             <img alt={props.content.title} src={props.content.icon} />
 
-            <Typography variant="title">{props.content.title}</Typography>
+            <Typography variant="title" align="center">{props.content.title}</Typography>
 
-            <br />
-
-            <Typography variant="subheading">
+            <Typography variant="subheading" align="left" style={{whiteSpace: 'pre-wrap'}}>
                 {props.content.description}
             </Typography>
 
             <br />
 
-            <Typography variant="title">Variações:</Typography>
-
-            <br />
+            <Typography variant="title" align="center">Variações do mercado no ultimo mês:</Typography>
 
             <Table aria-label="spanning table">
                 <TableBody>

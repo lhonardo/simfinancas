@@ -186,11 +186,11 @@ class World extends React.Component {
                 this.setState({ showLoading: false });
                 changeWallet(newWallet);
                 changeWorld(newWorld);
-                if (newWorld.year > 2 && newWorld.month == 12) {
+                if (newWorld.year > 2) {
                     openEndSimulationSummary();
                 }
                 openEndMonthInfo(simulatedValues);
-            }, 500);
+            }, 1000);
         } else {
             openEndSimulationSummary();
         }

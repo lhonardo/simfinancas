@@ -18,7 +18,7 @@ export const DEFINITIONS = {
             description: 
                 `
                 É quanto você tem disponível para investir. O montante que você deixar na conta corrente não sofrerá influência do mercado, ou seja, não irá gerar rendimentos nem perdas.
-                Em geral não há vantagens em deixar o dinheiro parado em conta corrente, pois a mesma não gera rendimentos e o valor irá sofrer alteração no valor real dependendo da inflação/deflação.
+                Em geral não há vantagens em deixar o dinheiro parado em conta corrente, pois a mesma não gera rendimentos e o poder de compra poderá se defazar devido a inflação.
                 `,
             link: 'https://pt.wikipedia.org/wiki/Conta-corrente',
             icon: account 
@@ -36,11 +36,12 @@ export const DEFINITIONS = {
             affectedBy: 'stockMarketPoints',
         },
         fixedIncome: {
-            name: 'Renda fixa',
+            name: 'Renda fixa (Juros)',
             description: `
                 Renda fixa é todo tipo de investimento que tem regras de rendimento pré definidas.
                 Ao aplicar, o investidor já fica sabendo o prazo e a taxa de rendimento e o índice que será usado para valorizar o dinheiro investido.
                 Alguns dos principais exemplos de Renda Fixa: Poupança, Tesouro Direto (títulos do governo) e CDBs (títulos de bancos com índice CDI).
+                Nessa simulação, ao investir em renda fixa o retorno do investimento será baseado na taxa de juros do mercado.
                 Risco: Investimento seguro.
             `,
             icon: fixedIncome,
@@ -60,7 +61,7 @@ export const DEFINITIONS = {
     },
     world: {
         inflation: {
-            name: 'Inflação mensal',
+            name: 'Inflação',
             description: `
                 Inflação é o nome dado ao aumento dos preços de produtos e serviços. 
                 Ela é calculada pelos índices de preços, comumente chamados de índices de inflação. 
@@ -69,7 +70,7 @@ export const DEFINITIONS = {
             icon: inflation,
         },
         interestRate: {
-            name: 'Taxa básica de Juros mensal',
+            name: 'Taxa básica de juros',
             description: `
                 A taxa básica de juros no Brasil é conhecida como taxa Selic. A meta da Selic é definida pelo Comitê de Política Monetária, o Copom.
                 O viés da taxa e sua meta são definidos em uma reunião da diretoria do Banco Central. E somente os diretores e o presidente podem votar e definir o percentual.
@@ -87,9 +88,9 @@ export const DEFINITIONS = {
             icon: stockMarketPoints,
         },
         rareMaterial: {
-            name: 'Metal precioso (100g de ouro)',
+            name: 'Metal precioso (barra de 100g)',
             description: `
-                No Brasil, no mercado financeiro, somente o ouro é considerado um ativo financeiro, a prata e outros metais não, até o momento (maio. 2021).
+                No mercado financeiro brasileiro somente o ouro é considerado um ativo financeiro, equanto a prata e outros metais não são (até o momento, maio. 2021).
                 Em outros países diversos metais preciosos são negociados como ativos financeiros. 
             `,
             icon: rareMaterial
@@ -103,12 +104,16 @@ export const DEFINITIONS = {
         },
         bad: {
             title: 'Atenção: algo está preocupando o mercado!',
-            description: 'Fique atento ao mercado, algo parece estar preocupando os investidores e vai afetar os próximos meses',
+            description: `
+            Fique atento ao mercado, algo parece estar preocupando os investidores e vai afetar os próximos meses.
+            Dica: Tome cuidado com investimentos de renda variável durante períodos de incerteza.`,
             icon: bad,
         },
         good: {
             title: 'Atenção: algo está animando o mercado!',
-            description: 'Fique atento ao mercado, algo parece estar animando os investidores e vai afetar os próximos meses',
+            description: `
+            Fique atento ao mercado, algo parece estar animando os investidores e vai afetar os próximos meses.
+            Dica: Vale a pena uma maior atenção aos investimentos de renda variável.`,
             icon: good,
         },
     }

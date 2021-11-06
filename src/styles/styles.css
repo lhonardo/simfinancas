@@ -24,6 +24,7 @@
 
 html {
     background-color: whitesmoke;
+    scroll-behavior: smooth;
 }
 
 body {

@@ -53,3 +53,7 @@ export const openEndSimulationSummary = () => ({
 export const closeEndSimulationSummary = () => ({
     type: 'CLOSE_END_SIMULATION_SUMMARY'
 });
+
+export const submitResultsSuccess = () => ({
+    type: 'SUBMIT_RESULTS'
+});

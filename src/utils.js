@@ -48,9 +48,9 @@ export const eventWillHappenWithProbability = () => {
 
 export const generateRegularMonthMarket = () => {
     return {
-        inflation: getRandomArbitrary(-0.002, 0.010),
-        interestRate: getRandomArbitrary(-0.002, 0.015),
+        inflation: getRandomArbitrary(-0.001, 0.009),
+        interestRate: getRandomArbitrary(-0.001, 0.015),
         stockMarketPoints: getRandomArbitrary(-0.010, 0.035),
-        rareMaterial: getRandomArbitrary(-0.035, 0.010),
+        rareMaterial: getRandomArbitrary(-0.005, 0.005),
     };
 };

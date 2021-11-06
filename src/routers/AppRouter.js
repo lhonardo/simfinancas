@@ -5,6 +5,7 @@ import NotFoundPage from '../components/NotFoundPage';
 
 import PrivateRoute from './PrivateRouter';
 import LoginPage from '../components/LoginPage';
+import AboutPage from '../components/AboutPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -12,6 +13,7 @@ const AppRouter = () => (
             <Switch>
                 <PrivateRoute path="/" component={HomePage} exact={true} />
                 <PrivateRoute path="/home" component={HomePage} />
+                <PrivateRoute path="/about" component={AboutPage} />
 
                 <Route path="/login" component={LoginPage} />
 

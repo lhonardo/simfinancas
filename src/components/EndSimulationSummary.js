@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -15,18 +15,48 @@ import { DEFINITIONS } from '../constants';
 
 import { formatPercentage, formatCurrency } from '../utils';
 
-const EndSimulationSummary = (props) => (
-    <Grid
+const storeResults = (results) => {
+    const url = 'https://simfinanceiro-default-rtdb.firebaseio.com/results.json';
+    const data = {results, datetime: new Date(), device: navigator.appVersion || ''};
+
+    return fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+  };
+
+const EndSimulationSummary = (props) => {
+    const walletSum = formatCurrency(
+        _.sum(Object.values(props.wallet))
+    );
+    const walletVariation = formatPercentage(
+        ((100 * _.sum(Object.values(props.wallet)) / 10000) - 100) / 100
+    );
+
+    useEffect(() => {
+        if (!props.resultsSubmitted) {
+            storeResults({
+                name: props.userName,
+                walletSum,
+                walletVariation,
+                simulationResults: props.world.simulationResults,
+            }).then(() => props.submitResultsSuccess())
+        }
+    }, []);
+
+    return <Grid
         container
         justify="center"
         alignContent="center"
         style={{ height: '100%', padding: '5%' }}
     >
         <Paper style={{ padding: 20, height: '80%' }} className="grid-aligned">
-            <Typography variant="display2" style={{ padding: 15 }}>
+            <Typography variant="display2" style={{ padding: 5 }}>
                 Fim!
             </Typography>
-            <Typography variant="title" gutterBottom style={{ padding: 15 }}>
+            <Typography variant="title" gutterBottom style={{ padding: 5 }}>
                 Você completou a simulação :)
             </Typography>
             <Typography variant="body2">
@@ -45,7 +75,7 @@ const EndSimulationSummary = (props) => (
                                             src={DEFINITIONS.world[key].icon}
                                         />
                                     </TableCell>
-                                    <TableCell>
+                                    <TableCell padding='dense'>
                                         {DEFINITIONS.world[key].name}
                                     </TableCell>
                                     <TableCell numeric>
@@ -63,9 +93,10 @@ const EndSimulationSummary = (props) => (
                     </TableBody>
                 </Table>
             </Grid>
-
+            
+            <br/>
             <Typography variant="title" gutterBottom>
-                Sobre a sua carteira
+                Sobre a sua carteira:
             </Typography>
             <Grid item xs={12}>
                 <Table aria-label="spanning table">
@@ -77,17 +108,13 @@ const EndSimulationSummary = (props) => (
                         <TableRow>
                             <TableCell>Final</TableCell>
                             <TableCell>
-                                {formatCurrency(
-                                    _.sum(Object.values(props.wallet))
-                                )}
+                                { walletSum }
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>Variação</TableCell>
                             <TableCell>
-                                {formatPercentage(
-                                    ((100 * _.sum(Object.values(props.wallet)) / 10000) - 100) / 100
-                                )}
+                                { walletVariation }
                             </TableCell>
                         </TableRow>
                     </TableBody>
@@ -106,6 +133,6 @@ const EndSimulationSummary = (props) => (
             </Grid>
         </Paper>
     </Grid>
-);
+};
 
 export default EndSimulationSummary;

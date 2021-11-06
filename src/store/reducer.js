@@ -35,6 +35,7 @@ export const INITIAL_STATE = {
     showEndSimulationSummary: false,
     isSimulationCompleted: false,
     appVersion: 1.1,
+    resultsSubmitted: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -112,6 +113,12 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 showEndSimulationSummary: false
+            }
+
+        case 'SUBMIT_RESULTS':
+            return {
+                ...state,
+                resultsSubmitted: true
             }
 
         default:

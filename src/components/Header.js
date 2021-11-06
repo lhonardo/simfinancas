@@ -11,6 +11,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import PersonIcon from '@material-ui/icons/Person';
+import HomeIcon from '@material-ui/icons/Home';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -52,29 +54,28 @@ class Header extends React.Component {
     render() {
         const { open } = this.state.componentsmenuopen;
         const publicNavs = [
-          {
-              url: '#',
-              name: 'Antes de começar',
-              icon: <PlayArrowIcon />,
-              onClick: () => this.props.openGettingStarted(),
-          },
-          {
-              url: '#',
-              name: 'Resetar Simulação',
-              icon: <AutorenewIcon />,
-              onClick: () => this.props.startLogout(),
-          },
-        //   {
-        //       url: '/about',
-        //       name: 'About',
-        //       icon: <ExtensionIcon />,
-        //   },
-        //   {
-        //       url: '/contact',
-        //       name: 'Contact',
-        //       icon: <PhoneIcon />,
-        //   },
-          // add new Nav links here as a json object, in this file the public navigations
+            {
+                url: '/home',
+                name: 'Home',
+                icon: <HomeIcon />,
+            },
+            {
+                url: '#',
+                name: 'Antes de começar',
+                icon: <PlayArrowIcon />,
+                onClick: () => this.props.openGettingStarted(),
+            },
+            {
+                url: '#',
+                name: 'Resetar Simulação',
+                icon: <AutorenewIcon />,
+                onClick: () => this.props.startLogout(),
+            },
+            {
+                url: '/about',
+                name: 'Sobre',
+                icon: <PersonIcon />,
+            },
         ];
         return (
             <div>
@@ -134,7 +135,7 @@ class Header extends React.Component {
                                 color="inherit"
                                 className="headertypoclass"
                             >
-                                SimFinance
+                                SimFinanceiro
                             </Typography>
 
                             <Button

@@ -174,13 +174,13 @@ export class WalletForm extends React.Component {
                                                         style={{marginRight: 10}}
                                                         onClick={() =>
                                                             this.handleInputChange(
-                                                                this.state.walletTempValues[key] < 100 
+                                                                this.state.walletTempValues[key] < 500 
                                                                     ? 0 
-                                                                    : this.state.walletTempValues[key] - 100, 
+                                                                    : this.state.walletTempValues[key] - 500, 
                                                             key)
                                                         }
                                                     >
-                                                        - $100
+                                                        - $500
                                                     </Button>
                                                     <Button
                                                         type="button"
@@ -189,13 +189,13 @@ export class WalletForm extends React.Component {
                                                         disabled={availableValue <= 0}
                                                         onClick={(e) => 
                                                             this.handleInputChange(
-                                                                availableValue < 100
+                                                                availableValue < 500
                                                                 ? this.state.walletTempValues[key] + availableValue
-                                                                : this.state.walletTempValues[key] + 100, 
+                                                                : this.state.walletTempValues[key] + 500, 
                                                             key)
                                                         }
                                                     >
-                                                        + $100
+                                                        + $500
                                                     </Button>
                                                 </Grid>
                                             </Grid>
