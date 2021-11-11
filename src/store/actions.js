@@ -31,7 +31,8 @@ export const closeEndMonthInfo = (showEventSummary) => ({
 
 export const openInfoModal = (key, name) => ({
     type: 'OPEN_INFO_MODAL',
-    content: DEFINITIONS[key][name]
+    content: DEFINITIONS[key][name],
+    info: name,
 });
 
 export const closeInfoModal = () => ({
@@ -52,6 +53,14 @@ export const openEndSimulationSummary = () => ({
 
 export const closeEndSimulationSummary = () => ({
     type: 'CLOSE_END_SIMULATION_SUMMARY'
+});
+
+export const openMustOpenAllInfos = () => ({
+    type: 'OPEN_MUST_OPEN_ALL_INFOS'
+});
+
+export const closeMustOpenAllInfos = () => ({
+    type: 'CLOSE_MUST_OPEN_ALL_INFOS'
 });
 
 export const submitResultsSuccess = () => ({

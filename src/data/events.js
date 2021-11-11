@@ -22,7 +22,7 @@ export const BAD_EVENTS = {
             },
             {
                 inflation: 0.01,
-                interestRate: 0,
+                interestRate: -0.08,
                 stockMarketPoints: -0.10,
                 rareMaterial: 0.05,
             },
@@ -57,9 +57,9 @@ export const BAD_EVENTS = {
         ],
     },
     greatDepression: {
-        name: 'Crise',
+        name: 'Grande depressão',
         description: `
-            Também conhecida como Grande Depressão, foi uma forte recessão econômica que atingiu o capitalismo internacional no final da década de 1920. 
+            Foi uma forte recessão econômica que atingiu o capitalismo internacional no final da década de 1920. 
             Marcou a decadência do liberalismo econômico, naquele momento, e teve como causas a superprodução e especulação financeira.
             Milhares de pessoas resolveram vender as suas ações no dia 24 de outubro de 1929, no que ficou conhecido como Quinta-feira Negra. Nesse dia, mais de 12 milhões de ações foram colocadas à venda, o que deixou o mercado em pânico. Imediatamente o valor das ações despencou, e bilhões de dólares desapareceram. A economia americana quebrou.
         `,
@@ -99,13 +99,13 @@ export const GOOD_EVENTS = {
         months: [
             {
                 inflation: 0,
-                interestRate: 0.02,
+                interestRate: 0.01,
                 stockMarketPoints: 0.15,
                 rareMaterial: -0.10,
             },
             {
                 inflation: 0.01,
-                interestRate: 0.10,
+                interestRate: 0.02,
                 stockMarketPoints: 0.34,
                 rareMaterial: -0.08,
             },
@@ -133,13 +133,13 @@ export const GOOD_EVENTS = {
             },
             {
                 inflation: 0,
-                interestRate: 0.10,
+                interestRate: 0.01,
                 stockMarketPoints: 0.36,
                 rareMaterial: -0.08,
             },
             {
                 inflation: 0.01,
-                interestRate: 0.05,
+                interestRate: 0.01,
                 stockMarketPoints: 0.30,
                 rareMaterial: -0.05,
             },

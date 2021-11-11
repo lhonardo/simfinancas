@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 export default () => (
   <div className="footer-container-box">
     <Typography variant="headline" gutterBottom>
-      SimFinanceiro
+      SimFinanças
     </Typography>
   </div>
 );

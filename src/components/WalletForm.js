@@ -139,75 +139,76 @@ export class WalletForm extends React.Component {
                             {formatCurrency(availableValue)}
                         </Typography>
                         <Grid container>
-                                    {Object.keys(DEFINITIONS.wallet).map((key) => {
-                                        return (
-                                            <Grid container xs={12} key={key} style={{marginBottom: 10}}>
-                                                <Grid xs={2}>
-                                                    <img
-                                                        src={DEFINITIONS.wallet[key].icon}
-                                                        width='40'
-                                                    />
+                            {Object.keys(DEFINITIONS.wallet).map((key) => {
+                                return (
+                                    <Grid container xs={12} key={key} style={{marginBottom: 10}}>
+                                        <Grid xs={2}>
+                                            <img
+                                                src={DEFINITIONS.wallet[key].icon}
+                                                width='40'
+                                            />
 
-                                                </Grid>
-                                                <Grid xs={4}>
-                                                    <TextField
-                                                        id={key}
-                                                        label={DEFINITIONS.wallet[key].name}
-                                                        value={
-                                                            this.state.walletTempValues[key]
-                                                        }
-                                                        onChange={(e) =>
-                                                            this.handleInputChange(e.target.value, key)
-                                                        }
-                                                        required
-                                                        InputProps={{
-                                                            inputComponent: CurrencyFormatInput,
-                                                        }}
-                                                    />
-                                                </Grid>
-                                                <Grid xs={6}>
-                                                    <Button
-                                                        type="button"
-                                                        color="primary"
-                                                        variant="fab"
-                                                        disabled={this.state.walletTempValues[key] <= 0}
-                                                        style={{marginRight: 10}}
-                                                        onClick={() =>
-                                                            this.handleInputChange(
-                                                                this.state.walletTempValues[key] < 500 
-                                                                    ? 0 
-                                                                    : this.state.walletTempValues[key] - 500, 
-                                                            key)
-                                                        }
-                                                    >
-                                                        - $500
-                                                    </Button>
-                                                    <Button
-                                                        type="button"
-                                                        color="primary"
-                                                        variant="fab"
-                                                        disabled={availableValue <= 0}
-                                                        onClick={(e) => 
-                                                            this.handleInputChange(
-                                                                availableValue < 500
-                                                                ? this.state.walletTempValues[key] + availableValue
-                                                                : this.state.walletTempValues[key] + 500, 
-                                                            key)
-                                                        }
-                                                    >
-                                                        + $500
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                        )
-                                    })}
+                                        </Grid>
+                                        <Grid xs={5} container>
+                                            <TextField
+                                                id={key}
+                                                label={DEFINITIONS.wallet[key].name}
+                                                align="left"
+                                                value={
+                                                    this.state.walletTempValues[key]
+                                                }
+                                                onChange={(e) =>
+                                                    this.handleInputChange(e.target.value, key)
+                                                }
+                                                required
+                                                InputProps={{
+                                                    inputComponent: CurrencyFormatInput,
+                                                }}
+                                            />
+                                        </Grid>
+                                        <Grid xs={5}>
+                                            <Button
+                                                type="button"
+                                                color="primary"
+                                                variant="fab"
+                                                disabled={this.state.walletTempValues[key] <= 0}
+                                                style={{marginRight: 10}}
+                                                onClick={() =>
+                                                    this.handleInputChange(
+                                                        this.state.walletTempValues[key] < 500 
+                                                            ? 0 
+                                                            : this.state.walletTempValues[key] - 500, 
+                                                    key)
+                                                }
+                                            >
+                                                - $500
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                color="primary"
+                                                variant="fab"
+                                                disabled={availableValue <= 0}
+                                                onClick={(e) => 
+                                                    this.handleInputChange(
+                                                        availableValue < 500
+                                                        ? this.state.walletTempValues[key] + availableValue
+                                                        : this.state.walletTempValues[key] + 500, 
+                                                    key)
+                                                }
+                                            >
+                                                + $500
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
                         <Grid
                             item
                             xs={12}
                             lg={12}
                             md={12}
-                            style={{ marginTop: 10 }}
+                            style={{ marginTop: 80 }}
                         >
                             <Tooltip 
                                 title={<h2>

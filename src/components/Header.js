@@ -13,6 +13,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import PersonIcon from '@material-ui/icons/Person';
 import HomeIcon from '@material-ui/icons/Home';
+import ListIcon from '@material-ui/icons/List';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -66,15 +67,20 @@ class Header extends React.Component {
                 onClick: () => this.props.openGettingStarted(),
             },
             {
-                url: '#',
-                name: 'Resetar Simulação',
-                icon: <AutorenewIcon />,
-                onClick: () => this.props.startLogout(),
+                url: '/ranking',
+                name: 'Ranking',
+                icon: <ListIcon />,
             },
             {
                 url: '/about',
                 name: 'Sobre',
                 icon: <PersonIcon />,
+            },
+            {
+                url: '#',
+                name: 'Sair',
+                icon: <AutorenewIcon />,
+                onClick: () => this.props.startLogout(),
             },
         ];
         return (
@@ -135,7 +141,7 @@ class Header extends React.Component {
                                 color="inherit"
                                 className="headertypoclass"
                             >
-                                SimFinanceiro
+                                SimFinanças
                             </Typography>
 
                             <Button
@@ -144,7 +150,7 @@ class Header extends React.Component {
                               onClick={this.props.startLogout}
                             >
                               {}
-                              Resetar simulação
+                              Sair
                             </Button>
                         </Toolbar>
                     </AppBar>

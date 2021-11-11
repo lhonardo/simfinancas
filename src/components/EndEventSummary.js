@@ -12,7 +12,7 @@ const EndEventSummary = (props) => (
         container
         justify="center"
         alignContent="center"
-        style={{ height: '100%' }}
+        style={{ height: '100%', transform: 'scale(0.9)' }}
     >
         <Paper style={{ padding: 10 }} className="grid-aligned">
             <Grid item xs={12}>
@@ -29,7 +29,7 @@ const EndEventSummary = (props) => (
             </Typography>
 
             <Typography variant="subheading">
-                Você acabou de passar por uma simulação de um evento histórico do mundo real nessa simulação.
+                Você acabou de passar por uma simulação de um evento histórico!
             </Typography>
 
             <br/>

@@ -10,6 +10,7 @@ import good from "./assets/img/good.png";
 import bad from "./assets/img/bad.png";
 import regular from "./assets/img/regular.png";
 import info from "./assets/img/info.png";
+import infoChecked from "./assets/img/infoChecked.png";
 
 export const DEFINITIONS = {
     wallet: {
@@ -74,7 +75,8 @@ export const DEFINITIONS = {
             description: `
                 A taxa básica de juros no Brasil é conhecida como taxa Selic. A meta da Selic é definida pelo Comitê de Política Monetária, o Copom.
                 O viés da taxa e sua meta são definidos em uma reunião da diretoria do Banco Central. E somente os diretores e o presidente podem votar e definir o percentual.
-                Uma taxa alta de juros tende a beneficiar os investimentos em renda fixa a frear a inflação. 
+                Uma taxa alta de juros tende a beneficiar os investimentos em renda fixa a frear a inflação.
+                Alguns países têm taxa de juros negativa, ou seja, você perde dinheiro se investí-lo em um título vinculado a uma taxa de juros negativa.
             `,
             icon: interestRate,
         },
@@ -99,24 +101,27 @@ export const DEFINITIONS = {
     endMonthInfo: {
         regular: {
             title: 'Mês normal',
-            description: 'Este foi um mês sem grandes acontecimentos e o mercado se comportou como os analistas previam.',
+            description: 'Este foi um mês sem grandes acontecimentos e o mercado se comportou como previsto.',
             icon: regular,
         },
         bad: {
             title: 'Atenção: algo está preocupando o mercado!',
             description: `
-            Fique atento ao mercado, algo parece estar preocupando os investidores e vai afetar os próximos meses.
+            Fique atento a sua carteira, algo parece estar preocupando os investidores e vai afetar os próximos meses.
             Dica: Tome cuidado com investimentos de renda variável durante períodos de incerteza.`,
             icon: bad,
         },
         good: {
             title: 'Atenção: algo está animando o mercado!',
             description: `
-            Fique atento ao mercado, algo parece estar animando os investidores e vai afetar os próximos meses.
-            Dica: Vale a pena uma maior atenção aos investimentos de renda variável.`,
+            Fique atento a sua carteira, algo parece estar animando os investidores e vai afetar os próximos meses.
+            Dica: Dê maior atenção aos investimentos de renda variável.`,
             icon: good,
         },
     }
 }
 
 export const infoIcon = info;
+export const infoCheckedIcon = infoChecked;
+
+export const requiredInfoModalsToStart = [...Object.keys(DEFINITIONS.wallet), ...Object.keys(DEFINITIONS.world)]

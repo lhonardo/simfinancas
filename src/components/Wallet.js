@@ -18,7 +18,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import WalletForm from './WalletForm';
-import { DEFINITIONS, infoIcon} from '../constants';
+import { DEFINITIONS, infoIcon, infoCheckedIcon } from '../constants';
 import { changeWallet, openInfoModal } from '../store/actions';
 import * as utils from '../utils';
 
@@ -97,7 +97,7 @@ class Wallet extends React.Component {
                                         </TableCell>
                                         <TableCell style={{padding:1}}>
                                             <a onClick={() => this.props.openInfoModal('wallet', key)}>
-                                                <img atl='Info' src={infoIcon} width="20" style={{marginLeft: 5}}/>
+                                                <img atl='Info' src={this.props.viewedInfos.includes(key) ? infoCheckedIcon : infoIcon} width="20" style={{marginLeft: 5}}/>
                                             </a>
                                         </TableCell>
                                     </TableRow>
@@ -146,6 +146,7 @@ class Wallet extends React.Component {
 const mapStateToProps = (state) => ({
     wallet: state.wallet,
     isSimulationCompleted: state.isSimulationCompleted,
+    viewedInfos: state.viewedInfos,
 });
 
 const mapDispatchToProps = (dispatch) => ({

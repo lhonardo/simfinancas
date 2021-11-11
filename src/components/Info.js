@@ -12,7 +12,7 @@ const Info = (props) => (
         alignContent="center"
         style={{ height: '100%', padding: '1%'}}
     >
-        <Paper style={{ padding: 15 }} className="grid-aligned">
+        <Paper style={{ padding: 5 }} className="grid-aligned">
             <img alt={props.content.title} src={props.content.icon} />
 
             <Typography variant="title" paragraph>{props.content.name}</Typography>
@@ -23,7 +23,7 @@ const Info = (props) => (
 
             <Divider />
 
-            <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>
+            <Grid item xs={12} style={{ marginTop: 3, textAlign: 'center' }}>
                 <Button
                     type="button"
                     color="primary"

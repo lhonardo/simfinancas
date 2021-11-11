@@ -8,11 +8,14 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import _ from 'lodash';
 
 import { DEFINITIONS } from '../constants';
-
+import { ALL_EVENTS } from '../data/events';
 import { formatPercentage, formatCurrency } from '../utils';
 
 const storeResults = (results) => {
@@ -42,6 +45,7 @@ const EndSimulationSummary = (props) => {
                 walletSum,
                 walletVariation,
                 simulationResults: props.world.simulationResults,
+                eventsOcurred: props.world.eventsOccurred
             }).then(() => props.submitResultsSuccess())
         }
     }, []);
@@ -50,12 +54,9 @@ const EndSimulationSummary = (props) => {
         container
         justify="center"
         alignContent="center"
-        style={{ height: '100%', padding: '5%' }}
+        style={{ height: '100%', padding: '5%'}}
     >
-        <Paper style={{ padding: 20, height: '80%' }} className="grid-aligned">
-            <Typography variant="display2" style={{ padding: 5 }}>
-                Fim!
-            </Typography>
+        <Paper style={{ padding: 10, height: '90%' }} className="grid-aligned">
             <Typography variant="title" gutterBottom style={{ padding: 5 }}>
                 Você completou a simulação :)
             </Typography>
@@ -67,7 +68,7 @@ const EndSimulationSummary = (props) => {
                     <TableBody>
                         {Object.keys(props.world.simulationResults).map(
                             (key) => (
-                                <TableRow key={key}>
+                                <TableRow key={key} style={{height: 35}}>
                                     <TableCell style={{ padding: 1 }}>
                                         <img
                                             width="30"
@@ -93,25 +94,24 @@ const EndSimulationSummary = (props) => {
                     </TableBody>
                 </Table>
             </Grid>
-            
             <br/>
             <Typography variant="title" gutterBottom>
                 Sobre a sua carteira:
             </Typography>
             <Grid item xs={12}>
-                <Table aria-label="spanning table">
+                <Table>
                     <TableBody>
-                        <TableRow>
+                        <TableRow style={{height: 25}}>
                             <TableCell>Inicial</TableCell>
                             <TableCell>$10.000,00</TableCell>
                         </TableRow>
-                        <TableRow>
+                        <TableRow style={{height: 25}}>
                             <TableCell>Final</TableCell>
                             <TableCell>
                                 { walletSum }
                             </TableCell>
                         </TableRow>
-                        <TableRow>
+                        <TableRow style={{height: 25}}>
                             <TableCell>Variação</TableCell>
                             <TableCell>
                                 { walletVariation }
@@ -121,7 +121,18 @@ const EndSimulationSummary = (props) => {
                 </Table>
             </Grid>
 
-            <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>
+            <Typography variant="subheading" gutterBottom>
+                Eventos históricos simulados:
+            </Typography>
+            <Grid alignItems="left" item xs={12}>
+                {
+                    props.world.eventsOccurred.map(event => <Typography variant="body1" align="left">
+                        {ALL_EVENTS[event].name}
+                    </Typography>
+                )}
+            </Grid>
+
+            <Grid item xs={12} style={{ marginTop: 5, textAlign: 'center' }}>
                 <Button
                     type="button"
                     color="primary"

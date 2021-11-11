@@ -16,13 +16,14 @@ import Paper from '@material-ui/core/Paper';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 
-import { DEFINITIONS, infoIcon } from '../constants';
+import { DEFINITIONS, infoIcon, infoCheckedIcon, requiredInfoModalsToStart } from '../constants';
 import {
     changeWorld,
     openEndMonthInfo,
     changeWallet,
     openInfoModal,
     openEndSimulationSummary,
+    openMustOpenAllInfos,
     logout,
 } from '../store/actions';
 
@@ -41,6 +42,7 @@ import globe from '../assets/img/globe.gif';
 import monthIcon from '../assets/img/month.png';
 
 import { ALL_EVENTS } from '../data/events';
+import _ from 'lodash';
 
 // Pass fusioncharts as a dependency of charts
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
@@ -76,123 +78,128 @@ class World extends React.Component {
             changeWallet,
             openEndMonthInfo,
             openEndSimulationSummary,
+            openMustOpenAllInfos,
             wallet,
         } = this.props;
 
-        if (world.year <= 2) {
-            this.setState({ showLoading: true });
-            const newWorld = { ...world };
-            const newWallet = { ...wallet };
-
-            let simulatedValues = {};
-            const availableEvents = Object.keys(ALL_EVENTS).filter(
-                (value) => !world.eventsOccurred.includes(value)
-            );
-
-            // Currently running event
-            if (
-                world.activeEvent &&
-                newWorld.activeEventMonth <
-                    ALL_EVENTS[world.activeEvent].months.length
-            ) {
-                simulatedValues = {
-                    ...DEFINITIONS.endMonthInfo[
-                        ALL_EVENTS[world.activeEvent].type
-                    ],
-                    ...ALL_EVENTS[world.activeEvent].months[
-                        world.activeEventMonth
-                    ],
-                };
-
-                // Will show end event summary
-                if ((
-                    newWorld.activeEventMonth ==
-                    ALL_EVENTS[world.activeEvent].months.length - 1) ||
-                    world.year == 2 && world.month == 11
-                ) {
-                    newWorld.activeEventMonth = 99;
-                } else {
-                    newWorld.activeEventMonth += 1;
-                }
-            } else {
-                // New event month
-                if (
-                    availableEvents.length &&
-                    !(world.year === 2 && world.month >= 10) &&
-                    eventWillHappenWithProbability()
-                ) {
-                    const event =
-                        availableEvents[
-                            Math.floor(Math.random() * availableEvents.length)
-                        ];
-                    newWorld.activeEvent = event;
-                    newWorld.activeEventMonth = 1;
-                    newWorld.eventsOccurred.push(event);
-                    simulatedValues = {
-                        ...DEFINITIONS.endMonthInfo[ALL_EVENTS[event].type],
-                        ...ALL_EVENTS[event].months[0],
-                    };
-                } else {
-                    // Regular month
-                    newWorld.activeEvent = null;
-                    newWorld.activeEventMonth = 1;
-
-                    simulatedValues = {
-                        ...DEFINITIONS.endMonthInfo.regular,
-                        ...generateRegularMonthMarket(),
-                    };
-                }
-            }
-
-            if (newWorld.month == 12) {
-                newWorld.year += 1;
-                newWorld.month = 0;
-            }
-
-            newWorld.month += 1;
-
-            // Adjust world values
-            ['stockMarketPoints', 'rareMaterial'].forEach((key) => {
-                newWorld[key] = parseFloat(
-                    (
-                        newWorld[key] +
-                        newWorld[key] * simulatedValues[key]
-                    ).toFixed(0)
+        if(_.isEqual(_.uniq(requiredInfoModalsToStart).sort(), _.uniq(this.props.viewedInfos).sort())) {
+            if (world.year <= 2) {
+                this.setState({ showLoading: true });
+                const newWorld = { ...world };
+                const newWallet = { ...wallet };
+    
+                let simulatedValues = {};
+                const availableEvents = Object.keys(ALL_EVENTS).filter(
+                    (value) => !world.eventsOccurred.includes(value)
                 );
-
-                newWorld.simulationResults[key].push(simulatedValues[key]);
-            });
-            ['inflation', 'interestRate'].forEach((key) => {
-                newWorld[key] = simulatedValues[key];
-
-                newWorld.simulationResults[key].push(simulatedValues[key]);
-            });
-
-            // Adjust wallet values
-            ['fixedIncome', 'stockMarket', 'rareMaterial'].forEach((key) => {
-                const affectedBy = DEFINITIONS.wallet[key].affectedBy;
-
-                if (wallet[key] > 0) {
-                    newWallet[key] = parseFloat(
+    
+                // Currently running event
+                if (
+                    world.activeEvent &&
+                    newWorld.activeEventMonth <
+                        ALL_EVENTS[world.activeEvent].months.length
+                ) {
+                    simulatedValues = {
+                        ...DEFINITIONS.endMonthInfo[
+                            ALL_EVENTS[world.activeEvent].type
+                        ],
+                        ...ALL_EVENTS[world.activeEvent].months[
+                            world.activeEventMonth
+                        ],
+                    };
+    
+                    // Will show end event summary
+                    if ((
+                        newWorld.activeEventMonth ==
+                        ALL_EVENTS[world.activeEvent].months.length - 1) ||
+                        world.year == 2 && world.month == 11
+                    ) {
+                        newWorld.activeEventMonth = 99;
+                    } else {
+                        newWorld.activeEventMonth += 1;
+                    }
+                } else {
+                    // New event month
+                    if (
+                        availableEvents.length &&
+                        !(world.year === 2 && world.month >= 10) &&
+                        eventWillHappenWithProbability()
+                    ) {
+                        const event =
+                            availableEvents[
+                                Math.floor(Math.random() * availableEvents.length)
+                            ];
+                        newWorld.activeEvent = event;
+                        newWorld.activeEventMonth = 1;
+                        newWorld.eventsOccurred.push(event);
+                        simulatedValues = {
+                            ...DEFINITIONS.endMonthInfo[ALL_EVENTS[event].type],
+                            ...ALL_EVENTS[event].months[0],
+                        };
+                    } else {
+                        // Regular month
+                        newWorld.activeEvent = null;
+                        newWorld.activeEventMonth = 1;
+    
+                        simulatedValues = {
+                            ...DEFINITIONS.endMonthInfo.regular,
+                            ...generateRegularMonthMarket(),
+                        };
+                    }
+                }
+    
+                if (newWorld.month == 12) {
+                    newWorld.year += 1;
+                    newWorld.month = 0;
+                }
+    
+                newWorld.month += 1;
+    
+                // Adjust world values
+                ['stockMarketPoints', 'rareMaterial'].forEach((key) => {
+                    newWorld[key] = parseFloat(
                         (
-                            wallet[key] +
-                            wallet[key] * simulatedValues[affectedBy]
+                            newWorld[key] +
+                            newWorld[key] * simulatedValues[key]
                         ).toFixed(0)
                     );
-                }
-            });
-
-            setTimeout(() => {
-                this.setState({ showLoading: false });
-                changeWallet(newWallet);
-                changeWorld(newWorld);
-                if (newWorld.year > 2) {
-                    openEndSimulationSummary();
-                }
-                openEndMonthInfo(simulatedValues);
-            }, 1000);
+    
+                    newWorld.simulationResults[key].push(simulatedValues[key]);
+                });
+                ['inflation', 'interestRate'].forEach((key) => {
+                    newWorld[key] = simulatedValues[key];
+    
+                    newWorld.simulationResults[key].push(simulatedValues[key]);
+                });
+    
+                // Adjust wallet values
+                ['fixedIncome', 'stockMarket', 'rareMaterial'].forEach((key) => {
+                    const affectedBy = DEFINITIONS.wallet[key].affectedBy;
+    
+                    if (wallet[key] > 0) {
+                        newWallet[key] = parseFloat(
+                            (
+                                wallet[key] +
+                                wallet[key] * simulatedValues[affectedBy]
+                            ).toFixed(0)
+                        );
+                    }
+                });
+    
+                setTimeout(() => {
+                    this.setState({ showLoading: false });
+                    changeWallet(newWallet);
+                    changeWorld(newWorld);
+                    if (newWorld.year > 2) {
+                        openEndSimulationSummary();
+                    }
+                    openEndMonthInfo(simulatedValues);
+                }, 500);
+            } else {
+                openEndSimulationSummary();
+            }
         } else {
-            openEndSimulationSummary();
+            openMustOpenAllInfos();
         }
     };
 
@@ -320,7 +327,7 @@ class World extends React.Component {
                                         >
                                             <img
                                                 atl="Info"
-                                                src={infoIcon}
+                                                src={this.props.viewedInfos.includes(key) ? infoCheckedIcon : infoIcon}
                                                 width="20"
                                                 style={{ marginLeft: 5 }}
                                             />
@@ -376,6 +383,7 @@ const mapStateToProps = (state) => ({
     world: state.world,
     wallet: state.wallet,
     isSimulationCompleted: state.isSimulationCompleted,
+    viewedInfos: state.viewedInfos,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -384,6 +392,7 @@ const mapDispatchToProps = (dispatch) => ({
     openEndMonthInfo: (content) => dispatch(openEndMonthInfo(content)),
     openInfoModal: (key, name) => dispatch(openInfoModal(key, name)),
     openEndSimulationSummary: () => dispatch(openEndSimulationSummary()),
+    openMustOpenAllInfos: () => dispatch(openMustOpenAllInfos()),
     startLogout: () => dispatch(logout()),
 });
 

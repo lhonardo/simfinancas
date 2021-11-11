@@ -6,6 +6,7 @@ import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRouter';
 import LoginPage from '../components/LoginPage';
 import AboutPage from '../components/AboutPage';
+import Ranking from '../components/Ranking';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/" component={HomePage} exact={true} />
                 <PrivateRoute path="/home" component={HomePage} />
                 <PrivateRoute path="/about" component={AboutPage} />
+                <PrivateRoute path="/ranking" component={Ranking} />
 
                 <Route path="/login" component={LoginPage} />
 

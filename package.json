@@ -1,7 +1,7 @@
 {
-  "name": "simfinance",
+  "name": "SimFinanças",
   "version": "1.0.0",
-  "description": "finance market simulator",
+  "description": "Simulador do mercado financeiro",
   "main": "app.js",
   "scripts": {
     "build": "webpack",

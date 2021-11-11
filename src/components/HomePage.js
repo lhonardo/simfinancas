@@ -11,6 +11,7 @@ import EndMonthInfo from './EndMonthInfo';
 import EndEventSummary from './EndEventSummary';
 import GettingStartedPage from './GettingStartedPage';
 import EndSimulationSummary from './EndSimulationSummary';
+import MustOpenAllInfos from './MustOpenAllInfos';
 import Info from './Info';
 
 import {
@@ -18,6 +19,7 @@ import {
     closeInfoModal,
     closeGettingStarted,
     closeEndSimulationSummary,
+    closeMustOpenAllInfos,
     submitResultsSuccess,
 } from '../store/actions';
 
@@ -82,6 +84,13 @@ const HomePage = (props) => (
                 />
             </DialogContent>
         </Modal>
+        <Modal open={props.showMustOpenAllInfos}>
+            <DialogContent style={{height: '100%'}}>
+                <MustOpenAllInfos
+                    close={props.closeMustOpenAllInfos}
+                />
+            </DialogContent>
+        </Modal>
     </React.Fragment>
 );
 
@@ -97,6 +106,7 @@ const mapStateToProps = (state) => ({
     showEndSimulationSummary: state.showEndSimulationSummary,
     resultsSubmitted: state.resultsSubmitted,
     userName: state.auth.userName,
+    showMustOpenAllInfos: state.showMustOpenAllInfos,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -105,6 +115,7 @@ const mapDispatchToProps = (dispatch) => ({
     closeInfoModal: () => dispatch(closeInfoModal()),
     closeGettingStarted: () => dispatch(closeGettingStarted()),
     closeEndSimulationSummary: () => dispatch(closeEndSimulationSummary()),
+    closeMustOpenAllInfos: () => dispatch(closeMustOpenAllInfos()),
     submitResultsSuccess: () => dispatch(submitResultsSuccess()),
 });
 

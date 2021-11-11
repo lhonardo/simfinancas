@@ -10,18 +10,15 @@ const GettingStarted = (props) => (
         container
         justify="center"
         alignContent="center"
-        style={{ height: '100%', padding: '5%' }}
+        style={{ height: '100%', padding: '2%' }}
     >
-        <Paper style={{ padding: 10, height: '80%' }} className="grid-aligned">
-            <Typography variant="display2" gutterBottom style={{ padding: 5 }}>
-                Olá!
-            </Typography>
+        <Paper style={{ padding: 5, height: '90%', transform: 'scale(0.9)' }} className="grid-aligned">
             <Typography variant="title" gutterBottom style={{ padding: 10 }}>
                 Antes de começar
             </Typography>
             <Typography variant="subheading" paragraph align="left">
-                Obrigado por usar essa ferramenta, ela foi desenvolvida única e exclusivamente para estudo
-                de alguns conceitos do mercado financeiro, todo e qualquer evento, valor, assim como possíveis ganhos ou perdas
+                Esta ferramenta foi desenvolvida exclusivamente para estudo
+                de alguns conceitos do mercado financeiro, qualquer evento, valor, possíveis ganhos ou perdas
                 são ficticios.
             </Typography>
             <Typography variant="subheading" paragraph align="left">

@@ -42,14 +42,14 @@ const getRandomIndex = (list) => Math.floor(Math.random() * list.length);
 const getRandomArbitrary = (min, max) => parseFloat((Math.random() * (max - min) + min).toFixed(4));
 
 export const eventWillHappenWithProbability = () => {
-    const notRandomBool = [false, false, false, false, false, false, false, false, true];
+    const notRandomBool = [false, false, false, false, false, false, true];
     return notRandomBool[getRandomIndex(notRandomBool)];
 };
 
 export const generateRegularMonthMarket = () => {
     return {
         inflation: getRandomArbitrary(-0.001, 0.009),
-        interestRate: getRandomArbitrary(-0.001, 0.015),
+        interestRate: getRandomArbitrary(-0.001, 0.018),
         stockMarketPoints: getRandomArbitrary(-0.010, 0.035),
         rareMaterial: getRandomArbitrary(-0.005, 0.005),
     };

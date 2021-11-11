@@ -33,9 +33,11 @@ export const INITIAL_STATE = {
     infoModalContent: {},
     showGettingStarted: true,
     showEndSimulationSummary: false,
+    showMustOpenAllInfos: false,
     isSimulationCompleted: false,
     appVersion: 1.1,
     resultsSubmitted: false,
+    viewedInfos: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -81,7 +83,10 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 showInfoModal: true,
-                infoModalContent: action.content
+                infoModalContent: action.content,
+                viewedInfos: state.viewedInfos.includes(action.info) 
+                    ? state.viewedInfos 
+                    : [...state.viewedInfos, action.info],
             }
         
         case 'CLOSE_INFO_MODAL':
@@ -113,6 +118,18 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 showEndSimulationSummary: false
+            }
+
+        case 'CLOSE_MUST_OPEN_ALL_INFOS':
+            return {
+                ...state,
+                showMustOpenAllInfos: false
+            }
+
+        case 'OPEN_MUST_OPEN_ALL_INFOS':
+            return {
+                ...state,
+                showMustOpenAllInfos: true
             }
 
         case 'SUBMIT_RESULTS':

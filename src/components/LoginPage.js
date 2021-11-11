@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 
+import Ranking from './Ranking';
+
 export const LoginPage = (props) => {
     const [userName, setUserName] = useState(props.userName || '');
     const [hasError, setHasError] = useState(false);
@@ -30,7 +32,7 @@ export const LoginPage = (props) => {
                         gutterBottom
                         className="loginpageheader"
                     >
-                        SimFinanceiro
+                        SimFinanças
                     </Typography>
                 </div>
                 <div style={{padding: 10}}>
@@ -39,9 +41,12 @@ export const LoginPage = (props) => {
                         mercado financeiro.
                     </Typography>
                     <Typography variant="subheading" component="h3" paragraph align="left">
-                        Tem como objetivo ensinar de forma prática e simplificada sobre os
+                        Tem como objetivo ensinar de forma prática sobre os
                         principais fatores que influênciam o mercado, através de eventos simulados
-                        criados baseando-se em acontecimentos reais do passado.
+                        criados baseando-se em acontecimentos reais do passado. 
+                    </Typography>
+                    <Typography variant="subheading" component="h3" paragraph align="left">
+                        Você vai ter a oportunidade de montar a sua carteira e simular 24 meses de variações do mercado, crises e também grandes oportunidades podem surgir, fique atento!
                     </Typography>
                     <Typography variant="headline" component="h3" paragraph align="left">
                         Para começar insira seu nome:
@@ -74,6 +79,8 @@ export const LoginPage = (props) => {
                     </Typography>
                 </Button>
             </Paper>
+
+            <Ranking />
         </div>
     );
 };

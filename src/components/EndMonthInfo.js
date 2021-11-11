@@ -15,9 +15,9 @@ import { formatPercentage } from '../utils';
 const EndMonthInfo = (props) => (
     <div
         className='grid-aligned' 
-        style={{ height: '100%' }}
+        style={{ height: '100%', transform: 'scale(0.9)' }}
     >
-        <Paper className="grid-aligned" style={{ padding: 15 }}>
+        <Paper className="grid-aligned" style={{ padding: 5 }}>
             <Typography variant="headline">
                 Resumo do mês:
             </Typography>
@@ -72,7 +72,7 @@ const EndMonthInfo = (props) => (
             </Table>
             
 
-            <Grid item xs={12} style={{ marginTop: 10, textAlign: 'center' }}>
+            <Grid item xs={12} style={{ marginTop: 5, textAlign: 'center' }}>
                 <Button
                     type="button"
                     color="primary"
